@@ -1,14 +1,21 @@
 <?php
 $random = mt_rand(1, 100);
-fwrite(STDOUT, 'Guess a number between 1 and 100:' . PHP_EOL);
+fwrite(STDOUT, 'Guess? ');
+$counter = 0;
 do {
-	$guess = intVal(fgets(STDIN));
-	if ($guess < $random) {
+	$guess = trim(fgets(STDIN));
+	$counter++;
+	if (!is_numeric($guess)){
+		fwrite(STDOUT, 'Not a number' . PHP_EOL);
+		fwrite(STDOUT, 'Guess? ');
+	} else if($guess == $random){
+		fwrite(STDOUT, 'Good guess! Guesses: ' . $counter . PHP_EOL);
+	} else if ($guess < $random){
 		fwrite(STDOUT, 'HIGHER' . PHP_EOL);
-	} else if ($guess > $random){
+		fwrite(STDOUT, 'Guess? ');
+	} else if($guess > $random){
 		fwrite(STDOUT, 'LOWER' . PHP_EOL);
-	} else {
-		fwrite(STDOUT, 'Lucky guess! You win!');
-	}	
+		fwrite(STDOUT, 'Guess? ');
+	}
 } while ($guess != $random);
 ?>
