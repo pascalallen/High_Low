@@ -1,11 +1,16 @@
 <?php
-$random = mt_rand(1, 100);
-fwrite(STDOUT, 'Guess? ');
+if($argc != 3){
+	die("Wrong number of arguments!" . PHP_EOL);	
+}
+$ranMin = $argv[1];
+$ranMax = $argv[2];
+$random = mt_rand($ranMin, $ranMax);
 $counter = 0;
+fwrite(STDOUT, 'Guess? ');
 do {
 	$guess = trim(fgets(STDIN));
 	$counter++;
-	if (!is_numeric($guess)){
+	if(!is_numeric($guess)){
 		fwrite(STDOUT, 'Not a number' . PHP_EOL);
 		fwrite(STDOUT, 'Guess? ');
 	} else if($guess == $random){
